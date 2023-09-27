@@ -1,8 +1,14 @@
 #!/usr/bin/python3
-def safe_print_integer(value):
-    try:
-        print("{:d}".format(value))
-    except Exception:
-        return False
+""" Working on oop with python """
 
-    return True
+
+class Square():
+    """Class representing a square"""
+
+    def __init__(self, size):
+        """ initialize the class
+
+        Args:
+           size (int): size of the square
+        """
+        self.__size = size
