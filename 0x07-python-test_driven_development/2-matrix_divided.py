@@ -19,17 +19,18 @@ def matrix_divided(matrix, div):
         a new matrix with elements rounded to 2 decimal places.
     """
 
-    if not isinstance(matrix, list)\
-        or len(matrix) == 0 or not matrix[0]\
-        or all(len(row) == 0 for row in matrix)\
-        or not all(isinstance(ele, (int, float))
-                   for row in matrix for ele in row):
-        raise TypeError("matrix must be a matrix (list of lists)" +
-                        " of integers/floats")
+    if not isinstance(matrix, list) or not\
+            all(isinstance(row, list) for row in matrix):
+        raise TypeError("matrix must be a matrix (list of lists)\
+                         of integers/floats")
 
     row_length = len(matrix[0])
-    if any(len(row) != row_length for row in matrix):
-        raise TypeError("Each row of the matrix must have the same size")
+    for row in matrix:
+        if any(type(ele) not in (int, float) for ele in row):
+            raise TypeError("matrix must be a matrix (list of lists)\
+                         of integers/floats")
+        if len(row) != row_length:
+            raise TypeError("Each row of the matrix must have the same size")
 
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
