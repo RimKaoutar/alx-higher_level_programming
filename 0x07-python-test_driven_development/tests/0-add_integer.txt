@@ -1,0 +1,117 @@
+The ``0-add_integer test`` module
+=================================
+
+Using ``add_integer``
+---------------------
+
+importing ``add_integer`` from the ``0-add_integer`` module:
+
+        >>> add_integer = __import__('0-add_integer').add_integer
+
+Checking for module docstring:
+
+    >>> m = __import__("0-add_integer").__doc__
+    >>> len(m) > 1
+    True
+
+Checking for function docstring:
+
+    >>> f = __import__("0-add_integer").add_integer.__doc__
+    >>> len(f) > 1
+    True
+
+Basic usage:
+
+    >>> add_integer(1, 2)
+    3
+
+Checking addition over multiple values:
+
+    >>> [add_integer(i, i ** 2) for i in range(6)]
+    [0, 2, 6, 12, 20, 30]
+
+Test int argument:
+
+    >>> add_integer(2)
+    100
+
+Checking positive with negative:
+
+    >>> add_integer(100, -2)
+    98
+
+Float and negative input:
+
+    >>> add_integer(100.3, -2)
+    98
+
+Float overflow:
+
+    >>> add_integer(1500.5)
+    1598
+
+String input:
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    >>> add_integer('aaa', 4)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer("a", "b")
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+None input:
+
+    >>> add_integer()
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
+Double negative float input:
+
+    >>> add_integer(-100.5, -10.8)
+    -110
+
+Double string input:
+
+    >>> add_integer("holberton", "school")
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+Negative and float varaibles input:
+
+    >>> add_integer(-2, 15.7) 
+    13
+
+Negative overflow value input:
+
+    >>> add_integer(-3)
+    95
+
+Casting string to float:
+
+    >>> add_integer(10/float("inf"), 6)
+    6
+
+    >>> add_integer(float("inf"), 5)
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float("nan"), 4)
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
+
+Type of inputs:
+
+    >>> type(add_integer(1, 2))
+    <class 'int'>
