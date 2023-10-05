@@ -23,12 +23,12 @@ class Rectangle:
         return self.__width
 
     @width.setter
-    """ Setter function for private variable, width.
+    def width(self, value):
+        """ Setter function for private variable, width.
 
         Args:
             value (int): The new width to set.
         """
-    def width(self, value):
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         elif value < 0:
