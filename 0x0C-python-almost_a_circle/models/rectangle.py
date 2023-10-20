@@ -131,3 +131,10 @@ class Rectangle(Base):
             which is the product of its width and height.
         """
         return self.width * self.height
+
+    def display(self):
+        """prints in stdout the Rectangle
+        instance with the character #
+        """
+        for _ in range(self.height):
+            print("#" * self.width)
