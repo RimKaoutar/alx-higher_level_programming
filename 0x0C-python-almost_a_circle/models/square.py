@@ -50,7 +50,7 @@ class Square(Rectangle):
             ValueError: If the value does not meet
             the specified condition (non-negative or positive).
         """
-        super().validation("width", value, False)
+        self.validation("width", value, False)
         self.width = value
         self.height = value
 
