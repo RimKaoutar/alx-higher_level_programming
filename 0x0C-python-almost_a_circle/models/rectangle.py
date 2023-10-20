@@ -38,7 +38,11 @@ class Rectangle(Base):
 
         Args:
             value (int): The width value to set.
+
+        Raises:
+            TypeError: If the value is not a positive integer.
         """
+        self.validator("width", value, False)
         self.__width = value
 
     @property
@@ -52,7 +56,11 @@ class Rectangle(Base):
 
         Args:
             value (int): The height value to set.
+
+        Raises:
+            TypeError: If the value is not a positive integer.
         """
+        self.validator("height", value, False)
         self.__height = value
 
     @property
@@ -66,7 +74,11 @@ class Rectangle(Base):
 
         Args:
             value (int): The x value to set.
+
+        Raises:
+            TypeError: If the value is not a non-negative integer.
         """
+        self.validator("x", value)
         self.__x = value
 
     @property
@@ -80,5 +92,33 @@ class Rectangle(Base):
 
         Args:
             value (int): The y value to set.
+
+        Raises:
+            TypeError: If the value is not a non-negative integer.
         """
+        self.validator("y", value)
         self.__y = value
+
+    def validator(self, name, value, eq=True):
+        """Method for validating an integer value.
+
+        Args:
+            name (str): The name of the value being
+            validated, used in error messages.
+            value (int): The value to be validated.
+            eq (bool, optional): Whether the value
+            should be greater than or equal to zero
+            (default) or strictly greater than zero.
+
+        Raises:
+            TypeError: If the value is not of type int.
+            ValueError: If the value does not meet
+            the specified condition (non-negative or positive).
+
+        """
+        if type(value) != int:
+            raise TypeError(f"{name} must be an integer")
+        if eq and value < 0:
+            raise ValueError(f"{name} must be >= 0")
+        if not eq and value <= 0:
+            raise ValueError(f"{name} must be > 0")
