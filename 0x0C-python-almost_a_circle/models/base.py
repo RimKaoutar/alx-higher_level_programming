@@ -5,6 +5,7 @@
 import json
 import os
 
+
 class Base:
     """A representation of the base of our OOP hierarchy."""
 
