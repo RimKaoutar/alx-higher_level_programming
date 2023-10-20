@@ -4,6 +4,7 @@
 
 import json
 import os
+import csv
 
 
 class Base:
@@ -131,3 +132,35 @@ class Base:
             with open(file_name, "r", encoding="utf-8") as file:
                 return [cls.create(**dictionary)
                         for dictionary in cls.from_json_string(file.read())]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """save ti file csv"""
+        try:
+            csvs = [x.to_dictionary() for x in list_objs]
+        except FileNotFoundError:
+            csvs = '[]'
+        keys = csvs[0].keys()
+        with open(cls.__name__ + '.csv', 'w') as file:
+            writer = csv.DictWriter(file, keys)
+            writer.writeheader()
+            writer.writerows(csvs)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """load from file csv"""
+        if not os.path.isfile(cls.__name__ + '.csv'):
+            return []
+
+        csvs = []
+        with open(cls.__name__ + '.csv', 'r') as file:
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                for key, val in row.items():
+                    try:
+                        row[key] = int(val)
+                    except ValueError:
+                        pass
+                csvs.append(row)
+        return [cls.create(**dic) for dic in csvs]
