@@ -147,3 +147,17 @@ class Rectangle(Base):
         [Rectangle] (<id>) <x>/<y> - <width>/<height>"""
         return f"[Rectangle] ({self.id}) \
 {self.x}/{self.y} - {self.width}/{self.height}"
+
+    def update(self, *args):
+        """
+        Updates the attributes of the instance
+        based on positional.
+
+        Args:
+            *args: Variable number of positional arguments.
+        """
+        if args and len(args) > 0:
+            attr = ["id", "width", "height", "x", "y"]
+            for i, arg in enumerate(args):
+                if i < len(attr):
+                    setattr(self, attr[i], arg)
