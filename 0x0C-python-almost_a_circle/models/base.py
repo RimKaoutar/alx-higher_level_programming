@@ -3,7 +3,7 @@
 
 
 import json
-
+import os
 
 class Base:
     """A representation of the base of our OOP hierarchy."""
@@ -105,3 +105,28 @@ class Base:
             dummy = None
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances.
+
+        If the file doesn’t exist, return an empty list.
+        Otherwise, return a list of instances - the type of these instances,
+        depends on cls (current class using this method).
+        You must use the from_json_string and create methods (implemented,
+        previously).
+        Args:
+            cls (any): class.
+
+        Returns:
+            list: list of instances.
+        """
+        cwd = os.getcwd()
+        file_exists = os.path.exists('{}/{}.json'.format(cwd, cls.__name__))
+        if file_exists is False:
+            return "[]"
+        else:
+            file_name = "{}.json".format(cls.__name__)
+            with open(file_name, "r", encoding="utf-8") as file:
+                return [cls.create(**dictionary)
+                        for dictionary in cls.from_json_string(file.read())]
