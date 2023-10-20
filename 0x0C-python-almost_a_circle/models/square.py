@@ -61,3 +61,25 @@ class Square(Rectangle):
             str: A string in the format "[Square] (id) x/y - size".
         """
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
+
+    def update(self, *args, **kwargs):
+        """
+        Updates the attributes of the instance
+        based on positional and keyword arguments.
+
+        Args:
+            *args: Variable number of positional arguments.
+            **kwargs: Variable number of keyword arguments.
+
+        Note:
+            This method allows updating attributes using a
+            combination of both positional and keyword arguments.
+        """
+        if args and len(args) > 0:
+            attribut_list = ['id', 'size', 'x', 'y']
+            for key, value in enumerate(args):
+                setattr(self, attribut_list[key], value)
+
+        if kwargs and len(kwargs) > 0:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
