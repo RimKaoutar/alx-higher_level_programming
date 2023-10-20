@@ -125,7 +125,7 @@ class Base:
         cwd = os.getcwd()
         file_exists = os.path.exists('{}/{}.json'.format(cwd, cls.__name__))
         if file_exists is False:
-            return "[]"
+            return []
         else:
             file_name = "{}.json".format(cls.__name__)
             with open(file_name, "r", encoding="utf-8") as file:
