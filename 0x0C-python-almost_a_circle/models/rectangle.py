@@ -148,16 +148,24 @@ class Rectangle(Base):
         return f"[Rectangle] ({self.id}) \
 {self.x}/{self.y} - {self.width}/{self.height}"
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """
         Updates the attributes of the instance
-        based on positional.
+        based on positional and keyword arguments.
 
         Args:
             *args: Variable number of positional arguments.
+            **kwargs: Variable number of keyword arguments.
+
+        Note:
+            This method allows updating attributes using a
+            combination of both positional and keyword arguments.
         """
         if args and len(args) > 0:
             attr = ["id", "width", "height", "x", "y"]
             for i, arg in enumerate(args):
                 if i < len(attr):
                     setattr(self, attr[i], arg)
+        if kwargs and len(kwargs) > 0:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
