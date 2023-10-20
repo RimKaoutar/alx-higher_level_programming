@@ -70,3 +70,38 @@ class Base:
         if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        Create an instance of the class with attributes set using a dictionary.
+
+        Args:
+            cls (type): The class type to create an instance of.
+            **dictionary (dict): A dictionary containing
+            attribute-value pairs for the instance.
+
+        Returns:
+            object: An instance of the class with
+            attributes set based on the provided dictionary.
+
+        Note:
+            This method is used to create an instance
+            of a class (e.g., Rectangle or Square)
+            with its attributes initialized using a
+            dictionary. It first determines the class type,
+            creates a "dummy" instance with default values,
+            and then updates the attributes of the
+            dummy instance with values from the dictionary.
+            The resulting instance is returned.
+        """
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls is Rectangle:
+            dummy = Rectangle(1, 1)
+        elif cls is Square:
+            dummy = Square(1)
+        else:
+            dummy = None
+        dummy.update(**dictionary)
+        return dummy
